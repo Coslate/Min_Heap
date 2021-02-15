@@ -32,6 +32,7 @@ int main(){
     int *ans_arr  = new int[n]();
     MinHeap<int> heap_a;
     MinHeap<int>::is_debug = false;
+    const bool max_to_min = false;
 
     std::cout<<"---test_arr initialize---"<<std::endl;
     //initialize random seed
@@ -40,7 +41,11 @@ int main(){
     std::cout<<"---before HeapSort---"<<std::endl;
     for(int i=0;i<n;++i){
         test_arr[i] = rand()%10000+1;
-        heap_a.Insert(test_arr[i]);
+        if(max_to_min){
+            heap_a.Insert(-1*test_arr[i]);
+        }else{
+            heap_a.Insert(test_arr[i]);
+        }
     }
 
     PrintArray(n, test_arr, "test_arr");
@@ -49,7 +54,11 @@ int main(){
     }
 
     for(int i=0;i<n;++i){
-        ans_arr[i] = heap_a.ExtractMin();
+        if(max_to_min){
+            ans_arr[i] = -1*heap_a.ExtractMin();
+        }else{
+            ans_arr[i] = heap_a.ExtractMin();
+        }
     }
 
     std::cout<<"---after HeapSort---"<<std::endl;
