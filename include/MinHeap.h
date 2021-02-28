@@ -116,11 +116,11 @@ bool operator>(const LinkedListNode& other1, const LinkedListNode& other2) {
 }
 */
 
-void CustSwap(int &data1, int &data2){
+static inline void CustSwap(int &data1, int &data2){
     std::swap(data1, data2);
 }
 
-void CustSwap(std::string &data1, std::string &data2){
+static inline void CustSwap(std::string &data1, std::string &data2){
     std::swap(data1, data2);
 }
 

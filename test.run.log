@@ -1,0 +1,44 @@
+---test_arr initialize---
+---before HeapSort---
+test_arr = [4419, 4731, 9569, 6311, 2068, 4696, 8192, 4822, 7401, 9053]
+---after HeapSort---
+ans_arr = [2068, 4419, 4696, 4731, 4822, 6311, 7401, 8192, 9053, 9569]
+
+==========================
+
+> Using LinkedListNode as the element type of the heap...
+> Initialization..
+In Heap, heap_arr_ = [(new_3_node, 3)<=>0, (new_22_node, 22)<=>1, (new_50_node, 50)<=>2, (new_199_node, 199)<=>3, (new_100_node, 100)<=>4]
+> DecreaseKey('new_199_node', 1)..
+In Heap, heap_arr_ = [(new_199_node, 1)<=>0, (new_3_node, 3)<=>1, (new_50_node, 50)<=>2, (new_22_node, 22)<=>3, (new_100_node, 100)<=>4]
+------
+> ExtractMin()..
+min_node = (new_199_node, 1)
+In Heap, heap_arr_ = [(new_3_node, 3)<=>0, (new_22_node, 22)<=>1, (new_50_node, 50)<=>2, (new_100_node, 100)<=>3]
+> DecreaseKey('new_100_node', 15)..
+In Heap, heap_arr_ = [(new_3_node, 3)<=>0, (new_100_node, 15)<=>1, (new_50_node, 50)<=>2, (new_22_node, 22)<=>3]
+------
+> ExtractMin()..
+min_node = (new_3_node, 3)
+In Heap, heap_arr_ = [(new_100_node, 15)<=>0, (new_22_node, 22)<=>1, (new_50_node, 50)<=>2]
+> DecreaseKey('new_100_node', 15)..
+In Heap, heap_arr_ = [(new_100_node, 15)<=>0, (new_22_node, 22)<=>1, (new_50_node, 50)<=>2]
+------
+> ExtractMin()..
+min_node = (new_100_node, 15)
+In Heap, heap_arr_ = [(new_22_node, 22)<=>0, (new_50_node, 50)<=>1]
+> DecreaseKey('new_100_node', 15)..
+----->Warning: DecreaseKey(): key_name not found in map_str2pos_.
+In Heap, heap_arr_ = [(new_22_node, 22)<=>0, (new_50_node, 50)<=>1]
+------
+> ExtractMin()..
+min_node = (new_22_node, 22)
+In Heap, heap_arr_ = [(new_50_node, 50)<=>0]
+> DecreaseKey('new_100_node', 15)..
+----->Warning: DecreaseKey(): key_name not found in map_str2pos_.
+In Heap, heap_arr_ = [(new_50_node, 50)<=>0]
+------
+> ExtractMin()..
+min_node = (new_50_node, 50)
+> DecreaseKey('new_100_node', 15)..
+----->Warning: DecreaseKey(): size_of_heap_ <= 0.
