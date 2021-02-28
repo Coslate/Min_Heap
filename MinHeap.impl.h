@@ -16,7 +16,9 @@ void MinHeap<T>::SiftUp(const int &pos){
         int parent_pos = floor((current_pos-1)/2.f);
 
         if((parent_pos >= 0) && (heap_arr_[parent_pos] > heap_arr_[current_pos])){
-            std::swap(heap_arr_[parent_pos], heap_arr_[current_pos]);
+            SetMapPos(heap_arr_[parent_pos], current_pos);
+            SetMapPos(heap_arr_[current_pos], parent_pos);
+            CustSwap(heap_arr_[parent_pos], heap_arr_[current_pos]);
         }else{
             break;
         }
@@ -47,7 +49,9 @@ void MinHeap<T>::SiftDown(const int &pos){
         }
 
         if(heap_arr_[current_pos] > heap_arr_[smaller_child]){
-            std::swap(heap_arr_[smaller_child], heap_arr_[current_pos]);
+            SetMapPos(heap_arr_[smaller_child], current_pos);
+            SetMapPos(heap_arr_[current_pos], smaller_child);
+            CustSwap(heap_arr_[smaller_child], heap_arr_[current_pos]);
             current_pos = smaller_child;
         }else{
             break;
@@ -56,7 +60,7 @@ void MinHeap<T>::SiftDown(const int &pos){
 }
 
 template <typename T>
-void MinHeap<T>::Resize(const T &new_cap_size){
+void MinHeap<T>::Resize(const int &new_cap_size){
     T* new_heap_arr_ = new T [new_cap_size]();
 
     for(int i=0;i<size_of_heap_;++i){
@@ -86,6 +90,7 @@ void MinHeap<T>::Insert(const T &data){
     }
 
     heap_arr_[size_of_heap_] = data;
+    SetMapPos(heap_arr_[size_of_heap_], size_of_heap_);
     size_of_heap_ = size_of_heap_tmp;
     SiftUp(size_of_heap_-1);
 }
@@ -93,12 +98,14 @@ void MinHeap<T>::Insert(const T &data){
 template <typename T>
 const T MinHeap<T>::ExtractMin(){
     if(size_of_heap_ <= 0){
-        throw std::runtime_error(std::string("Error in ExtractMin: size_of_heap_ <= 0."));
+        throw std::runtime_error(std::string("Error in ExtractMin(): size_of_heap_ <= 0."));
         return -1;
     }
 
     T ret_data = heap_arr_[0];
+    DeletePosFromMap(heap_arr_[0]);
     heap_arr_[0] = heap_arr_[size_of_heap_-1];
+    SetMapPos(heap_arr_[0], 0);
     --size_of_heap_;
     SiftDown(0);
 
@@ -111,3 +118,33 @@ const T MinHeap<T>::ExtractMin(){
     return ret_data;
 }
 
+template <typename T>
+void MinHeap<T>::DecreaseKey(const std::string &key_name, const int &key_val){
+    if(size_of_heap_ <= 0){
+        std::cout<<"----->Warning: DecreaseKey(): size_of_heap_ <= 0."<<std::endl;
+        return;
+    }
+
+    if(map_str2pos_.find(key_name) == map_str2pos_.end()){//not found
+        std::cout<<"----->Warning: DecreaseKey(): key_name not found in map_str2pos_."<<std::endl;
+        return;
+    }
+
+    int pos = map_str2pos_[key_name];
+    if(heap_arr_[pos] < key_val){
+        std::cout<<"----->Warning: DecreaseKey(): key_val is larger than the original value in heap."<<std::endl;
+        return;
+    }else if(heap_arr_[pos] == key_val){
+        //no need to do anything
+        return;
+    }
+
+    heap_arr_[pos] = key_val;
+    SiftUp(pos);
+
+    if(is_debug){
+        std::cout<<"DecreaseKey(), size_of_heap_ = "<<size_of_heap_<<std::endl;
+        PrintContent();
+        std::cout<<"---------"<<std::endl;
+    }
+}

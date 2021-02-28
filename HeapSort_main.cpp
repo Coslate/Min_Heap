@@ -4,6 +4,7 @@
 #include <string>
 #include <math.h>
 #include <MinHeap.h>
+#include <Linked_List.h>
 
 void PrintArray(const int size, const int* arr, const std::string arr_name){
     std::cout<<arr_name<<" = [";
@@ -63,6 +64,42 @@ int main(){
 
     std::cout<<"---after HeapSort---"<<std::endl;
     PrintArray(n, ans_arr, "ans_arr");
+
+//////////////////LinkedlistNode Testing///////////////////
+    std::cout<<std::endl;
+    std::cout<<"=========================="<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"> Using LinkedListNode as the element type of the heap..."<<std::endl;
+    MinHeap<LinkedListNode> heap_lln;
+    LinkedListNode min_node;
+    LinkedListNode* new_100_node = new LinkedListNode(100, "new_100_node");
+    LinkedListNode* new_50_node = new LinkedListNode(50, "new_50_node");
+    LinkedListNode* new_3_node = new LinkedListNode(3, "new_3_node");
+    LinkedListNode* new_199_node = new LinkedListNode(199, "new_199_node");
+    LinkedListNode* new_22_node = new LinkedListNode(22, "new_22_node");
+
+    heap_lln.Insert(*new_100_node);
+    heap_lln.Insert(*new_50_node);
+    heap_lln.Insert(*new_3_node);
+    heap_lln.Insert(*new_199_node);
+    heap_lln.Insert(*new_22_node);
+    std::cout<<"> Initialization.."<<std::endl;
+    heap_lln.PrintContent();
+    std::cout<<"> DecreaseKey('new_199_node', 1).."<<std::endl;
+    heap_lln.DecreaseKey("new_199_node", 1);
+    heap_lln.PrintContent();
+
+    while(heap_lln.GetSize() != 0){
+        std::cout<<"------"<<std::endl;
+        std::cout<<"> ExtractMin().."<<std::endl;
+        min_node = heap_lln.ExtractMin();
+        std::cout<<"min_node = "<<min_node<<std::endl;
+        heap_lln.PrintContent();
+
+        std::cout<<"> DecreaseKey('new_100_node', 15).."<<std::endl;
+        heap_lln.DecreaseKey("new_100_node", 15);
+        heap_lln.PrintContent();
+    }
 
     return EXIT_SUCCESS;
 }
