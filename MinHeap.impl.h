@@ -96,10 +96,10 @@ void MinHeap<T>::Insert(const T &data){
 }
 
 template <typename T>
-const T MinHeap<T>::ExtractMin(){
+T MinHeap<T>::ExtractMin(){
     if(size_of_heap_ <= 0){
         throw std::runtime_error(std::string("Error in ExtractMin(): size_of_heap_ <= 0."));
-        return -1;
+        exit(0);
     }
 
     T ret_data = heap_arr_[0];

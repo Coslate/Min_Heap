@@ -43,6 +43,9 @@ class MinHeap{
         void DeletePosFromMap(const std::string &str) { map_str2pos_.erase(str); }
         void DeletePosFromMap(const int         &key) { map_str2pos_.erase(std::to_string(key)); }
         void DeletePosFromMap(const LinkedListNode &node) { map_str2pos_.erase(node.GetName()); }
+        T&   GetDataFromMap(const std::string &str)    { return heap_arr_[map_str2pos_[str]]; }
+        T&   GetDataFromMap(const int &key)            { return heap_arr_[map_str2pos_[std::to_string(key)]]; }
+        T&   GetDataFromMap(const LinkedListNode &node){ return heap_arr_[map_str2pos_[node.GetName()]]; }
 
         // Returns a reference to the actual top data item in the list.
         // This can be used to directly change the data in that node.
@@ -71,7 +74,7 @@ class MinHeap{
         }
 
         void Insert(const T &data);
-        const T ExtractMin();
+        T ExtractMin();
         void DecreaseKey(const std::string &key_name, const int &key_val);
         //void DecreaseKey(const std::string &key_name, const float &key_val);
         //void DecreaseKey(const std::string &key_name, const double &key_val);
