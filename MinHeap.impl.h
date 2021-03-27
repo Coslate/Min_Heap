@@ -109,6 +109,12 @@ T MinHeap<T>::ExtractMin(){
     --size_of_heap_;
     SiftDown(0);
 
+    if(size_of_heap_ == 0){
+        delete [] heap_arr_;
+        heap_arr_ = nullptr;
+        cap_of_heap_ = 0;
+    }
+
     if(is_debug){
         std::cout<<"ExtractMin size_of_heap_ = "<<size_of_heap_<<", ret_data = "<<ret_data<<std::endl;
         PrintContent();
