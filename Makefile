@@ -1,6 +1,6 @@
 #declare variable
 EXE := main
-OBJS := Linked_List.o HeapSort_main.o
+OBJS := HeapSort_main.o
 OBJS_DIR := .objs
 INC_DIR := ./include . ../Linked_List/include/
 
